@@ -8,7 +8,7 @@ import * as headerActions from './headerActions';
 function Header({toggleMenu}) {
   return (
     <AppBar
-      title={<Link to="/view">Blank</Link>}
+      title={<Link style={{color: 'white', textDecoration: 'none'}} to="/view">Blank</Link>}
       onLeftIconButtonTouchTap={() => toggleMenu(true)}
     />
   );
