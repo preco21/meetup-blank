@@ -1,7 +1,8 @@
 import React from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {Editor, RichUtils} from 'draft-js';
+import {hashHistory} from 'react-router';
+import {Editor} from 'draft-js';
 import Paper from 'material-ui/Paper';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
@@ -16,7 +17,13 @@ function Content({
   updateContentName,
   updateContent,
 }) {
-  const {id, name, contentState} = contents.find(({id: contentId}) => contentId === currentContentId) || {};
+  const content = contents.find(({id: contentId}) => contentId === currentContentId);
+
+  if (content === undefined || content === null) {
+    hashHistory.push('/');
+  }
+
+  const {id, name, contentState} = content || {};
 
   const childEl = id
     ? (
@@ -43,7 +50,12 @@ function Content({
             <FlatButton primary={false} label="Underline" />
             <FlatButton primary={false} label="Monospace" />
           </div>
-          <Editor editorState={contentState} onChange={(editorState) => updateContent(id, editorState)} />
+          <Editor
+            style={{background: 'black'}}
+            className={styles.editor}
+            editorState={contentState}
+            onChange={(editorState) => updateContent(id, editorState)}
+          />
         </div>
       </div>
     )
