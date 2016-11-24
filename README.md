@@ -1,10 +1,8 @@
 # Simple Note Application (Blank)
 
-> For meetup demonstration
-
 [![Code Style Prev](https://img.shields.io/badge/code%20style-prev-32c8fc.svg?style=flat-square)](https://github.com/preco21/eslint-config-prev)
 
-> Yay!
+> For meetup demonstration Yay!
 
 ## Install
 
