@@ -1,5 +1,5 @@
 import sha1 from 'sha1';
-import {EditorState} from 'draft-js';
+import {createEmptyValue} from 'react-rte';
 
 function setCurrentContent(id) {
   return {
@@ -13,7 +13,7 @@ function createContent(name) {
     type: 'CREATE_CONTENT',
     id: sha1((new Date()).toString()),
     name,
-    content: EditorState.createEmpty(),
+    content: createEmptyValue(),
   };
 }
 

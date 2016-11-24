@@ -2,7 +2,7 @@ import React from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {hashHistory} from 'react-router';
-import {Editor} from 'draft-js';
+import RichTextEditor from 'react-rte';
 import Paper from 'material-ui/Paper';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
@@ -27,34 +27,17 @@ function Content({
 
   const childEl = id
     ? (
-      <div>
+      <div className={styles.editorContainer}>
         <TextField
           className={styles.title}
           defaultValue={name}
           onChange={({target: {value}}) => updateContentName(id, value)}
         />
-        <div>
-          <div className={styles.buttons}>
-            <FlatButton primary={true} label="H1" />
-            <FlatButton primary={false} label="H2" />
-            <FlatButton primary={false} label="H3" />
-            <FlatButton primary={false} label="H4" />
-            <FlatButton primary={false} label="H5" />
-            <FlatButton primary={false} label="H6" />
-            <FlatButton primary={false} label="Blockquote" />
-            <FlatButton primary={false} label="UL" />
-            <FlatButton primary={false} label="OL" />
-            <FlatButton primary={false} label="CodeBlock" />
-            <FlatButton primary={false} label="Bold" />
-            <FlatButton primary={false} label="Italic" />
-            <FlatButton primary={false} label="Underline" />
-            <FlatButton primary={false} label="Monospace" />
-          </div>
-          <Editor
-            style={{background: 'black'}}
-            className={styles.editor}
-            editorState={contentState}
+        <div className={styles.editor}>
+          <RichTextEditor
+            value={contentState}
             onChange={(editorState) => updateContent(id, editorState)}
+            autoFocus
           />
         </div>
       </div>
