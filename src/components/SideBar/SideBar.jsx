@@ -11,7 +11,6 @@ function SideBar({
     isOpened,
   },
   content: {
-    currentContentId,
     contents,
   },
   openMemo,
@@ -27,13 +26,13 @@ function SideBar({
         onRequestChange={(open) => toggleMenu(open)}
       >
         <AppBar title="Menu" showMenuIconButton={false} />
-        <MenuItem onTouchTap={() => createNewMemo('TEMP NAME', open)}>
+        <MenuItem onTouchTap={() => createNewMemo('', open)}>
           [ Add Memo + ]
         </MenuItem>
         {contents
           .map(({id, name}) => (
             <MenuItem key={id} onTouchTap={() => openMemo(id)}>
-              {name}
+              {name || '[EMPTY]'}
             </MenuItem>
           ))}
       </Drawer>

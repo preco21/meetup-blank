@@ -33,7 +33,7 @@ function contentRecucer(
           if (elem.id === action.id) {
             return {
               ...elem,
-              name: action.name || '[EMPTY]',
+              name: action.name,
             };
           }
 
