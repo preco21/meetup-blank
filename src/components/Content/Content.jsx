@@ -4,7 +4,6 @@ import {connect} from 'react-redux';
 import {hashHistory} from 'react-router';
 import RichTextEditor from 'react-rte';
 import Paper from 'material-ui/Paper';
-import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 import * as contentActions from './contentActions';
 import * as styles from './styles.css';
@@ -29,8 +28,9 @@ function Content({
     ? (
       <div className={styles.editorContainer}>
         <TextField
+          name={id}
           className={styles.title}
-          defaultValue={name}
+          value={name}
           onChange={({target: {value}}) => updateContentName(id, value)}
         />
         <div className={styles.editor}>
