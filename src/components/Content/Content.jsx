@@ -9,6 +9,9 @@ import * as contentActions from './contentActions';
 import * as styles from './styles.css';
 
 function Content({
+  params: {
+    memoId,
+  },
   content: {
     currentContentId,
     contents,
@@ -16,9 +19,9 @@ function Content({
   updateContentName,
   updateContent,
 }) {
-  const content = contents.find(({id: contentId}) => contentId === currentContentId);
+  const content = contents.find(({id: contentId}) => contentId === currentContentId || contentId === memoId);
 
-  if (content === undefined || content === null) {
+  if (content === undefined) {
     hashHistory.push('/');
   }
 
@@ -42,11 +45,7 @@ function Content({
         </div>
       </div>
     )
-    : (
-      <div>
-        NO DATA
-      </div>
-    );
+    : <div />;
 
   return (
     <div className={styles.base}>

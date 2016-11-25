@@ -20,15 +20,6 @@ const store = createStore(rootReducer, composeWithDevTools(
   autoRehydrate(),
 ));
 
-if (module.hot) {
-  module.hot.accept('./components/App', () => renderApp());
-  module.hot.accept('./rootReducer', () => {
-    const nextReducer = require('./rootReducer').default;
-
-    store.replaceReducer(nextReducer);
-  });
-}
-
 const contentTransform = createTransform(
   (state) => ({
     ...state,
@@ -49,8 +40,12 @@ const contentTransform = createTransform(
   },
 );
 
-persistStore(store, {transforms: [contentTransform]});
-renderApp();
+persistStore(store, {transforms: [contentTransform]}, () => renderApp());
+
+if (module.hot) {
+  module.hot.accept('./components/App', () => renderApp());
+  module.hot.accept('./rootReducer', () => store.replaceReducer(rootReducer));
+}
 
 function renderApp() {
   render(
