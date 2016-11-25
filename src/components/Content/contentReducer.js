@@ -56,10 +56,10 @@ function contentRecucer(
         }),
       };
     }
-    case 'REMOVE_CONTENT': {
+    case 'DELETE_CONTENT': {
       return {
         ...state,
-        currentId: null,
+        currentContentId: null,
         contents: state.contents.filter(({id}) => id !== action.id),
       };
     }

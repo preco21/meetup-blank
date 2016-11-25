@@ -33,9 +33,9 @@ function updateContent(id, content) {
   };
 }
 
-function removeContent(id) {
+function deleteContent(id) {
   return {
-    type: 'UPDATE_CONTENT',
+    type: 'DELETE_CONTENT',
     id,
   };
 }
@@ -45,5 +45,5 @@ export {
   createContent,
   updateContentName,
   updateContent,
-  removeContent,
+  deleteContent,
 };

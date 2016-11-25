@@ -1,6 +1,6 @@
 import {hashHistory} from 'react-router';
 import {toggleMenu as headerToggleMenu} from '../Header/headerActions';
-import {setCurrentContent, createContent} from '../Content/contentActions';
+import {setCurrentContent, createContent, deleteContent} from '../Content/contentActions';
 
 function toggleMenu(open) {
   return (dispatch) => dispatch(headerToggleMenu(open));
@@ -28,8 +28,16 @@ function openMemo(id, open) {
   };
 }
 
+function deleteMemo(id) {
+  return (dispatch) => {
+    dispatch(deleteContent(id));
+    hashHistory.push('/');
+  };
+}
+
 export {
   openMemo,
   toggleMenu,
   createNewMemo,
+  deleteMemo,
 };

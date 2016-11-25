@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import Drawer from 'material-ui/Drawer';
 import AppBar from 'material-ui/AppBar';
 import MenuItem from 'material-ui/MenuItem';
+import FlatButton from 'material-ui/FlatButton';
 import * as sideBarActions from './sideBarActions';
 
 function SideBar({
@@ -16,6 +17,7 @@ function SideBar({
   openMemo,
   toggleMenu,
   createNewMemo,
+  deleteMemo,
 }) {
   return (
     <div>
@@ -33,6 +35,7 @@ function SideBar({
           .map(({id, name}) => (
             <MenuItem key={id} onTouchTap={() => openMemo(id)}>
               {name || '[EMPTY]'}
+              <FlatButton label="X" onTouchTap={() => deleteMemo(id)} />
             </MenuItem>
           ))}
       </Drawer>
