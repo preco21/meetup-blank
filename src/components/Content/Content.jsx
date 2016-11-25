@@ -21,7 +21,7 @@ function Content({
 }) {
   const content = contents.find(({id: contentId}) => contentId === currentContentId || contentId === memoId);
 
-  if (content === undefined) {
+  if (!content) {
     hashHistory.push('/');
   }
 
