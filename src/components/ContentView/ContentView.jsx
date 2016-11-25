@@ -1,9 +1,31 @@
 import React from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
+import {hashHistory} from 'react-router';
+import {Card, CardHeader} from 'material-ui/Card';
 
-function ContentView() {
-  return <div>히이이익</div>;
+function ContentView({
+  content: {
+    contents,
+  },
+}) {
+  return (
+    <div>
+      {contents.length < 1
+        ? (
+          <div>NO MEMO</div>
+        )
+        : (
+          <div>
+            {contents.map(({id, name}) => (
+              <Card key={id} onTouchTap={() => hashHistory.push(`/memo/${id}`)}>
+                <CardHeader title={name} />
+              </Card>
+            ))}
+          </div>
+        )}
+    </div>
+  );
 }
 
 const ConnectedContentView = connect(
