@@ -10,6 +10,7 @@ import {Router, Route, Redirect, IndexRedirect, hashHistory} from 'react-router'
 import {AppContainer} from 'react-hot-loader';
 import RedBox from 'redbox-react';
 import {createValueFromString} from 'react-rte';
+import localforage from 'localforage';
 import App from './components/App';
 import Content from './components/Content';
 import ContentView from './components/ContentView';
@@ -40,7 +41,16 @@ const contentTransform = createTransform(
   },
 );
 
-persistStore(store, {transforms: [contentTransform]}, () => renderApp());
+persistStore(
+  store,
+  {
+    storage: localforage,
+    transforms: [
+      contentTransform,
+    ],
+  },
+  () => renderApp(),
+);
 
 if (module.hot) {
   module.hot.accept('./components/App', () => renderApp());
