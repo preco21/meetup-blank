@@ -26,4 +26,4 @@ $ npm run build
 
 ## License
 
-[MIT](preco.mit-license.org)
+[MIT](https://preco.mit-license.org)
