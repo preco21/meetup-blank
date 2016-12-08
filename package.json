@@ -18,7 +18,7 @@
     "url": "https://github.com/preco21/meetup-woah-2016-demo/issues"
   },
   "dependencies": {
-    "babel-polyfill": "^6.16.0",
+    "babel-polyfill": "^6.20.0",
     "localforage": "^1.4.3",
     "material-ui": "^0.16.1",
     "react": "^15.3.2",
