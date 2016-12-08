@@ -35,7 +35,7 @@ function SideBar({
           .map(({id, name}) => (
             <MenuItem key={id} onTouchTap={() => openMemo(id)}>
               {name || '[EMPTY]'}
-              <FlatButton label="X" onTouchTap={() => deleteMemo(id)} />
+              <FlatButton label="❌" onTouchTap={() => deleteMemo(id)} />
             </MenuItem>
           ))}
       </Drawer>
