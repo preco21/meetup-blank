@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {Link} from 'react-router';
@@ -13,6 +13,10 @@ function Header({toggleMenu}) {
     />
   );
 }
+
+Header.propTypes = {
+  toggleMenu: PropTypes.func,
+};
 
 const ConnectedHeader = connect(
   (state) => state,

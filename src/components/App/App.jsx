@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
@@ -9,6 +9,10 @@ import theme from './theme';
 const muiTheme = getMuiTheme(theme);
 
 class App extends Component {
+  static propTypes = {
+    children: PropTypes.element,
+  };
+
   componentWillMount() {
     injectTapEventPlugin();
   }

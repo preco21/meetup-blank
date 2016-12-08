@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {hashHistory} from 'react-router';
@@ -27,6 +27,12 @@ function ContentView({
     </div>
   );
 }
+
+ContentView.propTypes = {
+  content: PropTypes.shape({
+    contents: PropTypes.object,
+  }),
+};
 
 const ConnectedContentView = connect(
   (state) => state,

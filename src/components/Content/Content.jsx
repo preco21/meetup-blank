@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {hashHistory} from 'react-router';
@@ -55,6 +55,18 @@ function Content({
     </div>
   );
 }
+
+Content.propTypes = {
+  params: {
+    memoId: PropTypes.string,
+  },
+  content: {
+    currentContentId: PropTypes.string,
+    contents: PropTypes.object, // eslint-disable-line react/forbid-prop-types
+  },
+  updateContentName: PropTypes.func,
+  updateContent: PropTypes.func,
+};
 
 const ConnectedContent = connect(
   (state) => state,

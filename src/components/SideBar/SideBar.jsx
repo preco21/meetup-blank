@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import Drawer from 'material-ui/Drawer';
@@ -42,6 +42,19 @@ function SideBar({
     </div>
   );
 }
+
+SideBar.propTypes = {
+  header: PropTypes.shape({
+    isOpened: PropTypes.bool,
+  }),
+  content: PropTypes.shape({
+    contents: PropTypes.object,
+  }),
+  openMemo: PropTypes.func,
+  toggleMenu: PropTypes.func,
+  createNewMemo: PropTypes.func,
+  deleteMemo: PropTypes.func,
+};
 
 const ConnectedSideBar = connect(
   (state) => state,
