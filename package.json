@@ -1,7 +1,7 @@
 {
-  "name": "meetup-blank",
+  "name": "meetup-woah-2016-demo",
   "version": "0.0.0",
-  "description": "Meetup demonstration application - Blank",
+  "description": "Meetup demonstration application",
   "author": "Plusb Preco <plusb21@gmail.com>",
   "private": true,
   "scripts": {
@@ -12,10 +12,10 @@
     "dev": "babel-node scripts/serve.js"
   },
   "license": "MIT",
-  "homepage": "https://github.com/preco21/meetup-blank#readme",
-  "repository": "preco21/meetup-blank",
+  "homepage": "https://github.com/preco21/meetup-woah-2016-demo#readme",
+  "repository": "preco21/meetup-woah-2016-demo",
   "bugs": {
-    "url": "https://github.com/preco21/meetup-blank/issues"
+    "url": "https://github.com/preco21/meetup-woah-2016-demo/issues"
   },
   "dependencies": {
     "animejs": "^1.1.1",
