@@ -4,7 +4,7 @@
 
 > For meetup demonstration Yay!
 
-**[Woah 2016! presentation](https://slides.com/preco/woah-2016/)**
+**[Woah 2016! presentation](https://slides.com/preco21/woah-2016/)**
 
 ## Install
 
