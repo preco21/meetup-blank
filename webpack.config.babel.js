@@ -123,6 +123,9 @@ function config({dev = false} = {}) {
     resolve: {
       extensions: ['.js', '.jsx'],
     },
+    performance: {
+      hints: !dev,
+    },
   };
 }
 
