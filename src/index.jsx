@@ -13,10 +13,10 @@ import configurePersist from './configurePersist';
 
 const store = configureStore();
 
-configurePersist(store, () => renderApp());
+configurePersist(store, renderApp);
 
 if (module.hot) {
-  module.hot.accept('./components/App', () => renderApp());
+  module.hot.accept('./components/App', renderApp);
 }
 
 function renderApp() {
