@@ -9,11 +9,10 @@ import App from './components/App';
 import Content from './components/Content';
 import ContentView from './components/ContentView';
 import configureStore from './configureStore';
-import configurePersist from './configurePersist';
 
 const store = configureStore();
 
-configurePersist(store, renderApp);
+renderApp();
 
 if (module.hot) {
   module.hot.accept('./components/App', renderApp);
