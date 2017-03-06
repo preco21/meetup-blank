@@ -1,10 +1,10 @@
 import './styles.css';
 import React from 'react';
-import {Provider} from 'react-redux';
 import {render} from 'react-dom';
-import {Router, Route, Redirect, IndexRedirect, hashHistory} from 'react-router';
+import {Provider} from 'react-redux';
 import {AppContainer} from 'react-hot-loader';
 import RedBox from 'redbox-react';
+import {Router, Route, Redirect, IndexRedirect, hashHistory} from 'react-router';
 import App from './components/App';
 import Content from './components/Content';
 import ContentView from './components/ContentView';
@@ -13,10 +13,7 @@ import configureStore from './configureStore';
 const store = configureStore();
 
 renderApp();
-
-if (module.hot) {
-  module.hot.accept('./components/App', renderApp);
-}
+applyHotLoader();
 
 function renderApp() {
   render(
@@ -34,4 +31,10 @@ function renderApp() {
     </AppContainer>,
     document.getElementById('app'),
   );
+}
+
+function applyHotLoader() {
+  if (module.hot) {
+    module.hot.accept('./components/App', renderApp);
+  }
 }
