@@ -26,10 +26,8 @@ const copy = [
 ];
 
 function config({dev = false} = {}) {
-  if (dev) {
-    process.env.BABEL_ENV = 'development';
-  }
-
+  const env = dev ? 'development' : 'production';
+  
   return {
     devtool: dev ? 'eval-source-map' : 'hidden-source-map',
     entry: [
@@ -49,6 +47,7 @@ function config({dev = false} = {}) {
           loader: 'babel-loader',
           options: {
             cacheDirectory: dev,
+            forceEnv: env,
           },
         },
         {
@@ -89,6 +88,16 @@ function config({dev = false} = {}) {
         template: `${src}/template.ejs`,
         inject: false,
       }),
+      new DefinePlugin({
+        'process.env.NODE_ENV': JSON.stringify(env),
+      }),
+      new LoaderOptionsPlugin({
+        minimize: !dev,
+        debug: dev,
+        options: {
+          context: __dirname,
+        },
+      }),
       ...(dev
         ? [
           new HotModuleReplacementPlugin(),
@@ -96,9 +105,6 @@ function config({dev = false} = {}) {
           new NoEmitOnErrorsPlugin(),
         ]
         : [
-          new DefinePlugin({
-            'process.env.NODE_ENV': JSON.stringify('production'),
-          }),
           new ExtractTextPlugin({
             filename: `style${dev ? '' : '.[contenthash]'}.css`,
             allChunks: true,
@@ -106,13 +112,6 @@ function config({dev = false} = {}) {
           new UglifyJsPlugin({
             sourceMap: true,
             comments: false,
-          }),
-          new LoaderOptionsPlugin({
-            minimize: !dev,
-            debug: dev,
-            options: {
-              context: __dirname,
-            },
           }),
         ]),
     ],
