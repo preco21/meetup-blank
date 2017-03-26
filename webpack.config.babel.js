@@ -5,16 +5,16 @@ import {
   HotModuleReplacementPlugin,
   NamedModulesPlugin,
   NoEmitOnErrorsPlugin,
-  optimize,
 } from 'webpack';
 import HTMLPlugin from 'html-webpack-plugin';
 import CopyPlugin from 'copy-webpack-plugin';
-import ExtractTextPlugin, {extract} from 'extract-text-webpack-plugin';
 import CleanPlugin from 'clean-webpack-plugin';
+import BabiliPlugin from 'babili-webpack-plugin';
+import ExtractTextPlugin, {extract} from 'extract-text-webpack-plugin';
 
-const {
-  UglifyJsPlugin,
-} = optimize;
+const host = 'localhost';
+const port = process.env.PORT || 3000;
+const url = `http://${host}:${port}/`;
 
 const src = 'src';
 const dest = 'app';
@@ -25,15 +25,28 @@ const copy = [
   },
 ];
 
-function config({dev = false} = {}) {
+const cssLoader = {
+  loader: 'css-loader',
+  options: {
+    sourceMap: true,
+    modules: true,
+    localIdentName: '[name]__[local]___[hash:base64:5]',
+  },
+};
+
+function config({dev} = {}) {
   const env = dev ? 'development' : 'production';
-  
+
   return {
     devtool: dev ? 'eval-source-map' : 'hidden-source-map',
     entry: [
-      ...(dev ? ['react-hot-loader/patch'] : []),
+      ...(dev ? [
+        `webpack-dev-server/client?${url}`,
+        'webpack/hot/only-dev-server',
+        'react-hot-loader/patch',
+      ] : []),
       'babel-polyfill',
-      `./${src}`,
+      `./${src}/index.jsx`,
     ],
     output: {
       path: resolve(__dirname, dest),
@@ -53,31 +66,13 @@ function config({dev = false} = {}) {
         {
           test: /\.css$/,
           include: resolve(__dirname, src),
-          ...(dev
-            ? {
-              use: [
-                'style-loader',
-                {
-                  loader: 'css-loader',
-                  options: {
-                    sourceMap: true,
-                    modules: true,
-                    localIdentName: '[name]__[local]___[hash:base64:5]',
-                  },
-                },
-              ],
-            }
-            : {
-              loader: extract({
-                fallbackLoader: 'style-loader',
-                loader: 'css-loader',
-                query: {
-                  sourceMap: true,
-                  modules: true,
-                  localIdentName: '[name]__[local]___[hash:base64:5]',
-                },
-              }),
-            }),
+          use: dev ? [
+            'style-loader',
+            cssLoader,
+          ] : extract({
+            fallback: 'style-loader',
+            use: cssLoader,
+          }),
         },
       ],
     },
@@ -98,22 +93,17 @@ function config({dev = false} = {}) {
           context: __dirname,
         },
       }),
-      ...(dev
-        ? [
-          new HotModuleReplacementPlugin(),
-          new NamedModulesPlugin(),
-          new NoEmitOnErrorsPlugin(),
-        ]
-        : [
-          new ExtractTextPlugin({
-            filename: `style${dev ? '' : '.[contenthash]'}.css`,
-            allChunks: true,
-          }),
-          new UglifyJsPlugin({
-            sourceMap: true,
-            comments: false,
-          }),
-        ]),
+      ...(dev ? [
+        new HotModuleReplacementPlugin(),
+        new NamedModulesPlugin(),
+        new NoEmitOnErrorsPlugin(),
+      ] : [
+        new ExtractTextPlugin({
+          filename: `style${dev ? '' : '.[contenthash]'}.css`,
+          allChunks: true,
+        }),
+        new BabiliPlugin(),
+      ]),
     ],
     resolve: {
       extensions: ['.js', '.jsx', '.json'],
