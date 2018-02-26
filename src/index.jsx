@@ -3,7 +3,6 @@ import React from 'react';
 import {render} from 'react-dom';
 import {Provider} from 'react-redux';
 import {AppContainer} from 'react-hot-loader';
-import RedBox from 'redbox-react';
 import {Router, Route, Redirect, IndexRedirect, hashHistory} from 'react-router';
 import configureStore from './configureStore';
 import App from './components/App';
@@ -17,7 +16,7 @@ applyHotLoader();
 
 function renderApp() {
   render(
-    <AppContainer errorReporter={RedBox}>
+    <AppContainer>
       <Provider store={store}>
         <Router history={hashHistory}>
           <Route path="/" component={App}>
